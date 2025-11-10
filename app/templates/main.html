@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="light" lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Призма AI - Создайте презентацию из данных за секунды</title>
+    <meta name="description" content="Загрузите документ (.xlsx, .xls, .pdf) или вставьте текст, и наш AI поможет вам сделать презентацию, быстро получить профессиональный отчет и построить эффективную визуализацию данных.">
+    <meta name="keywords" content="сделать презентацию, быстро получить презентацию, построить эффективную презентацию, AI презентация, генератор отчетов, анализ данных">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <style>
+        /* --- Стили для анимации прогресс-бара --- */
+        #loading-character * {
+            transition: all 0.5s ease-in-out;
+        }
+        .eye { animation: blink 2s infinite steps(1, start); }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .antenna-light { animation: pulse-light 1s infinite alternate; }
+        @keyframes pulse-light { to { fill: #8B5CF6; } }
+        
+        /* Анимация сканирования */
+        .scan-line {
+            transform-origin: 50% 50%;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan {
+            0% { transform: translateY(-10px) scale(1, 0.1); opacity: 0; }
+            40% { transform: translateY(30px) scale(1, 1); opacity: 1; }
+            60% { transform: translateY(30px) scale(1, 1); opacity: 1; }
+            100% { transform: translateY(80px) scale(1, 0.1); opacity: 0; }
+        }
+
+        /* Анимация мыслей */
+        .thought-bubble { animation: float-up 5s ease-in-out infinite; }
+        @keyframes float-up {
+            0%, 100% { transform: translateY(0); opacity: 0; }
+            10%, 80% { transform: translateY(-15px); opacity: 1; }
+        }
+
+        /* Анимация финальной готовности */
+        .ready-glow { animation: ready-glow-anim 1.5s infinite alternate; }
+        @keyframes ready-glow-anim { to { filter: drop-shadow(0 0 8px #4b2bee); } }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4b2bee",
+              "background-light": "#f6f6f8",
+              "background-dark": "#131022",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+    <!-- Schema.org Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Призма AI",
+      "description": "Сервис для создания презентаций с помощью AI. Загрузите документ или вставьте текст, чтобы быстро получить и построить эффективную презентацию с графиками и инсайтами.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Призма AI"
+      },
+      "serviceType": "Создание презентаций",
+      "keywords": "сделать презентацию, быстро получить презентацию, построить эффективную презентацию"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Какие форматы можно использовать, чтобы сделать презентацию?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Наш сервис является универсальным генератором презентаций и поддерживает множество форматов. Вы можете загружать структурированные данные в файлах Microsoft Excel (.xlsx, .xls) для глубокой бизнес-аналитики, а также документы PDF (.pdf) с текстовой информацией. Кроме того, если у вас есть просто идея или сырой текст, вы можете вставить его напрямую. Наш AI проведет анализ данных из любого источника и поможет построить эффективную презентацию."
+        }
+      },{
+        "@type": "Question",
+        "name": "Как именно AI превращает мои данные в отчет?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "После загрузки наш искусственный интеллект выступает в роли вашего личного аналитика. Он изучает структуру и содержание данных, выявляет ключевые метрики, тенденции и взаимосвязи. Затем он автоматически подбирает наиболее подходящие способы визуализации данных — графики, диаграммы, KPI-карточки — чтобы быстро получить презентацию, которая будет не просто набором слайдов, а полноценным интерактивным дашбордом. Весь процесс нацелен на извлечение максимального количества инсайтов из данных."
+        }
+      },{
+        "@type": "Question",
+        "name": "Что я получу в результате? Это будет файл для PowerPoint?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Вы получаете гораздо больше, чем статичный файл. Результат — это единый, полностью интерактивный HTML-файл. Это не просто слайды, а живой интерактивный дашборд, где вы можете наводить курсор на графики для получения дополнительной информации. Такой формат помогает построить эффективную презентацию, которая вовлекает аудиторию и позволяет исследовать данные прямо во время выступления. Его можно открыть в любом браузере или отправить коллеге по почте."
+        }
+      },{
+        "@type": "Question",
+        "name": "Насколько быстро я получу готовую презентацию?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Наш сервис оптимизирован для скорости. Мы понимаем, как важно быстро получить презентацию в условиях дефицита времени. В большинстве случаев, обработка данных и генерация отчета занимают меньше минуты. Мгновенная презентация — это не просто слова, а ключевой принцип нашей работы. Это идеальный инструмент для подготовки к встрече, на которую у вас осталось всего несколько минут."
+        }
+      }]
+    }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#100d1b] dark:text-gray-200">
+    <div id="main-content" class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="absolute inset-0 z-0 opacity-20 dark:opacity-20">
+            <div class="absolute -top-60 -left-60 h-96 w-96 rounded-full bg-primary/20 blur-3xl"></div>
+            <div class="absolute -bottom-80 -right-60 h-96 w-96 rounded-full bg-teal-400/20 blur-3xl"></div>
+        </div>
+        <main class="relative z-10 mx-auto w-full max-w-5xl px-4 py-10 sm:py-16 lg:py-20">
+            <div class="relative mb-8 text-center flex flex-col items-center justify-center">
+                <div class="flex items-center justify-center gap-4">
+                    <svg class="h-16 w-16 sm:h-24 sm:w-24" fill="none" height="100" viewBox="0 0 100 87" width="115" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M57.5 0L115 86.6025H0L57.5 0Z" fill="url(#paint0_linear_1_2)"></path>
+                        <g filter="url(#filter0_f_1_2)">
+                            <path d="M57.5 5L110.115 81.6025H4.88461L57.5 5Z" stroke="white" stroke-opacity="0.5" stroke-width="2"></path>
+                        </g>
+                        <g style="mix-blend-mode:overlay">
+                            <path d="M-10 43.3013H45" stroke="black" stroke-opacity="0.5" stroke-width="6"></path>
+                        </g>
+                        <path d="M70 30.8013L125 15.8013" stroke="#38BDF8" stroke-width="6"></path>
+                        <path d="M70 43.3013H125" stroke="#A78BFA" stroke-width="6"></path>
+                        <path d="M70 55.8013L125 70.8013" stroke="#FB923C" stroke-width="6"></path>
+                        <defs>
+                            <filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="85.6025" id="filter0_f_1_2" width="114.231" x="-0.115387" y="4">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                <feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape"></feBlend>
+                                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="2"></feGaussianBlur>
+                            </filter>
+                            <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_1_2" x1="57.5" x2="57.5" y1="0" y2="86.6025">
+                                <stop stop-color="white" stop-opacity="0.1"></stop>
+                                <stop offset="1" stop-color="white" stop-opacity="0.4"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <h1 class="text-[#100d1b] dark:text-white text-6xl font-black leading-tight tracking-[-0.033em] sm:text-8xl">Призма</h1>
+                </div>
+            </div>
+            <div class="mx-auto mb-8 max-w-3xl text-center">
+                <p class="text-[#594c9a] dark:text-gray-400 text-lg">Загрузите ваши данные или просто опишите задачу. Наш AI-агент проанализирует информацию, найдет ключевые инсайты и автоматически создаст готовую к показу презентацию с графиками и выводами. Экономьте часы работы и получайте результат за секунды.</p>
+            </div>
+            <div class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div class="flex h-full w-full flex-col">
+                    <div class="flex h-full w-full flex-col items-center justify-center gap-6 rounded-xl border border-gray-200 bg-white/50 p-6 shadow-lg shadow-gray-500/5 backdrop-blur-sm dark:border-gray-700 dark:bg-background-dark/50">
+                        <textarea id="text-input" class="form-input min-h-[150px] w-full flex-1 resize-none rounded-lg border-gray-300 bg-gray-50 p-4 text-[#100d1b] placeholder:text-[#594c9a] focus:border-primary focus:ring-2 focus:ring-primary/50 dark:border-gray-600 dark:bg-gray-800/50 dark:text-gray-200 dark:placeholder:text-gray-500 dark:focus:ring-primary/80" placeholder="Введите свой текст, от 500 до 10000 символов..."></textarea>
+                    </div>
+                </div>
+                <div class="flex h-full w-full flex-col">
+                    <div id="upload-container" class="flex h-full flex-col items-center justify-center gap-6 rounded-xl border-2 border-dashed border-[#d3cfe7] bg-white/50 p-6 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-colors hover:border-primary/80 dark:border-gray-700 dark:bg-background-dark/50">
+                        <input type="file" id="file-input" class="hidden" accept=".xlsx, .xls, .pdf">
+                        <div class="flex flex-col items-center gap-2">
+                            <span class="material-symbols-outlined text-4xl text-primary">upload_file</span>
+                            <p id="upload-text" class="text-center text-lg font-bold leading-tight tracking-[-0.015em] text-[#100d1b] dark:text-white">Перетащите или нажмите, чтобы загрузить файл</p>
+                            <p class="text-center text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Поддерживаемые форматы: .xlsx, .xls, .pdf</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <button id="submit-btn" class="flex min-w-[84px] w-full max-w-lg cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-gradient-to-br from-purple-600 to-blue-500 text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-100">
+                    <span class="truncate">Сделать презентацию</span>
+                </button>
+            </div>
+            <div class="mt-20 sm:mt-24 lg:mt-32">
+                <div class="flex flex-col gap-10">
+                    <div class="text-center">
+                        <h2 class="text-[#100d1b] dark:text-white tracking-tight text-3xl font-bold leading-tight sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em] max-w-3xl mx-auto">Как Призма превращает данные в инсайты</h2>
+                        <p class="text-[#594c9a] dark:text-gray-400 text-base font-normal leading-normal max-w-3xl mx-auto mt-4">Наш AI-агент берет на себя сложную работу по анализу и визуализации, чтобы вы могли сосредоточиться на принятии решений.</p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex flex-1 flex-col gap-3 rounded-xl border border-gray-200 bg-white/50 dark:border-gray-700 dark:bg-background-dark/50 backdrop-blur-sm p-5 shadow-lg shadow-gray-500/5">
+                            <span class="material-symbols-outlined text-3xl text-primary">rocket_launch</span>
+                            <div class="flex flex-col gap-1">
+                                <h3 class="text-base font-bold leading-tight text-[#100d1b] dark:text-white">Скорость и Простота</h3>
+                                <p class="text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Забудьте о часах ручной работы. Наш AI мгновенно анализирует ваши данные и текст, экономя ваше время.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-1 flex-col gap-3 rounded-xl border border-gray-200 bg-white/50 dark:border-gray-700 dark:bg-background-dark/50 backdrop-blur-sm p-5 shadow-lg shadow-gray-500/5">
+                            <span class="material-symbols-outlined text-3xl text-primary">monitoring</span>
+                            <div class="flex flex-col gap-1">
+                                <h3 class="text-base font-bold leading-tight text-[#100d1b] dark:text-white">От данных к Визуализации</h3>
+                                <p class="text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Автоматически преобразуем сырые таблицы и документы в понятные графики, диаграммы и ключевые выводы.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-1 flex-col gap-3 rounded-xl border border-gray-200 bg-white/50 dark:border-gray-700 dark:bg-background-dark/50 backdrop-blur-sm p-5 shadow-lg shadow-gray-500/5">
+                            <span class="material-symbols-outlined text-3xl text-primary">lightbulb</span>
+                            <div class="flex flex-col gap-1">
+                                <h3 class="text-base font-bold leading-tight text-[#100d1b] dark:text-white">Готовые Бизнес-Инсайты</h3>
+                                <p class="text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Получайте не просто данные, а готовые к презентации инсайты, которые помогут вашей команде принимать верные решения.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-auto mt-20 max-w-3xl sm:mt-24 lg:mt-32">
+                <div class="mb-10 text-center">
+                    <h2 class="text-[#100d1b] dark:text-white tracking-tight text-3xl font-bold leading-tight sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]">Часто задаваемые вопросы</h2>
+                </div>
+                <div class="space-y-4">
+                    <details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+                        <summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Какие форматы можно использовать, чтобы сделать презентацию?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+                        </summary>
+                        <p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">Наш сервис является универсальным **генератором презентаций** и поддерживает множество форматов. Вы можете загружать структурированные данные в файлах Microsoft Excel (.xlsx, .xls) для глубокой **бизнес-аналитики**, а также документы PDF (.pdf) с текстовой информацией. Кроме того, если у вас есть просто идея или сырой текст, вы можете вставить его напрямую. Наш AI проведет **анализ данных** из любого источника и поможет **построить эффективную презентацию**.</p>
+                    </details>
+                    <details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+                        <summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Как именно AI превращает мои данные в отчет?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+                        </summary>
+                        <p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">После загрузки наш искусственный интеллект выступает в роли вашего личного аналитика. Он изучает структуру и содержание данных, выявляет ключевые метрики, тенденции и взаимосвязи. Затем он автоматически подбирает наиболее подходящие способы **визуализации данных** — графики, диаграммы, KPI-карточки — чтобы **быстро получить презентацию**, которая будет не просто набором слайдов, а полноценным **интерактивным дашбордом**. Весь процесс нацелен на извлечение максимального количества **инсайтов из данных**.</p>
+                    </details>
+                    <details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+                        <summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Что я получу в результате? Это будет файл для PowerPoint?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+                        </summary>
+                        <p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">Вы получаете гораздо больше, чем статичный файл. Результат — это единый, полностью интерактивный HTML-файл. Это не просто слайды, а живой **интерактивный дашборд**, где вы можете наводить курсор на графики для получения дополнительной информации. Такой формат помогает **построить эффективную презентацию**, которая вовлекает аудиторию и позволяет исследовать данные прямо во время выступления. Его можно открыть в любом браузере или отправить коллеге по почте.</p>
+                    </details>
+                    <details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+                        <summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Насколько быстро я получу готовую презентацию?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+                        </summary>
+                        <p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">Наш сервис оптимизирован для скорости. Мы понимаем, как важно **быстро получить презентацию** в условиях дефицита времени. В большинстве случаев, обработка данных и генерация отчета занимают меньше минуты. **Мгновенная презентация** — это не просто слова, а ключевой принцип нашей работы. Это идеальный инструмент для подготовки к встрече, на которую у вас осталось всего несколько минут.</p>
+                    </details>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <section id="loading-section" class="fixed inset-0 z-50 flex-col items-center justify-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm hidden">
+        <!-- Loading content here -->
+    </section>
+
+    <section id="result-section" class="hidden fixed inset-0 z-40 flex-col">
+        <div class="bg-gray-100 dark:bg-gray-900/50 py-2 sticky top-0 z-20">
+            <div class="container mx-auto flex justify-center items-center gap-4">
+                <button id="new-doc-button" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold text-base rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300">
+                    Создать новый
+                </button>
+                <button id="share-button" class="flex items-center justify-center px-4 py-2 bg-primary text-white font-bold text-base rounded-xl shadow-lg shadow-primary/30 hover:bg-primary-dark transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6.002l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                    </svg>
+                    Поделиться
+                </button>
+            </div>
+            <div id="share-feedback" class="text-center mt-2 text-green-500 font-semibold" style="display: none;">Ссылка скопирована!</div>
+        </div>
+        <div id="result-frame" class="w-full h-full flex-grow">
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const textInput = document.getElementById('text-input');
+        const uploadContainer = document.getElementById('upload-container');
+        const fileInput = document.getElementById('file-input');
+        const uploadText = document.getElementById('upload-text');
+        const submitBtn = document.getElementById('submit-btn');
+
+        const mainContent = document.getElementById('main-content');
+        const loadingSection = document.getElementById('loading-section');
+        const resultSection = document.getElementById('result-section');
+        
+        let isLoading = false;
+        let animationInterval;
+        
+        // --- Dark Mode Toggle ---
+        // Add a button with id="theme-toggle" to your HTML
+        // const themeToggle = document.getElementById('theme-toggle');
+        // if(themeToggle) {
+        //     themeToggle.addEventListener('click', () => {
+        //         document.documentElement.classList.toggle('dark');
+        //     });
+        // }
+
+        // --- Event Listeners ---
+        submitBtn.addEventListener('click', () => {
+            const file = fileInput.files[0];
+            const text = textInput.value.trim();
+            if (text) handleText(text);
+            else if (file) handleFile(file);
+            else showError("Пожалуйста, вставьте текст или выберите файл.");
+        });
+
+        uploadContainer.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                uploadText.textContent = `Выбран файл: ${fileName}`;
+            }
+        });
+
+        ['dragover', 'dragenter'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                uploadContainer.classList.add('border-primary/80');
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                uploadContainer.classList.remove('border-primary/80');
+            });
+        });
+
+        uploadContainer.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                const event = new Event('change');
+                fileInput.dispatchEvent(event);
+            }
+        });
+        
+        // --- Handlers ---
+        async function handleFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            await sendRequest(formData);
+        }
+
+        async function handleText(text) {
+            const formData = new FormData();
+            formData.append('text_input', text);
+            await sendRequest(formData);
+        }
+
+        async function sendRequest(formData) {
+            if (isLoading) return;
+            isLoading = true;
+            showLoadingState();
+            try {
+                const response = await fetch('/process-file/', { method: 'POST', body: formData });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `Ошибка сервера: ${response.status}`);
+                }
+                const resultData = await response.json();
+                showResult(resultData.html, resultData.report_id);
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                isLoading = false;
+                clearInterval(animationInterval);
+            }
+        }
+        
+        // --- UI State Changers ---
+        function showLoadingState() {
+            mainContent.classList.add('hidden');
+            loadingSection.classList.remove('hidden');
+            loadingSection.classList.add('flex');
+            loadingSection.innerHTML = `
+                <div class="flex flex-col items-center justify-center gap-6 py-14 text-center">
+                    <div id="character-container" class="h-40 w-40"></div>
+                    <p id="loading-message" class="text-[#100d1b] dark:text-white text-xl font-bold max-w-lg h-16"></p>
+                    <div class="w-full max-w-md bg-gray-200 rounded-full dark:bg-gray-700">
+                        <div id="progress-bar" class="bg-primary text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 10%; transition: width 2s ease-out;">10%</div>
+                    </div>
+                </div>
+            `;
+            
+            const messageContainer = document.getElementById('loading-message');
+            const progressBar = document.getElementById('progress-bar');
+            const characterContainer = document.getElementById('character-container');
+
+            const stages = [
+                {
+                    progress: 25,
+                    character: `<svg viewBox="0 0 120 120"><defs><filter id="glow"><feGaussianBlur stdDeviation="3.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path fill="#e0e7ff" d="M30 50 a 10 10 0 0 1 60 0 v 50 a 10 10 0 0 1 -60 0 z" /><rect x="35" y="30" width="50" height="25" rx="5" fill="#c7d2fe"/><rect x="53" y="35" width="14" height="14" rx="3" fill="white" class="eye"/><path class="scan-line" stroke="#4b2bee" stroke-width="2" filter="url(#glow)" d="M40 70 h 40" /></svg>`,
+                    messages: ["Так-так-так, что тут у нас за секретики...", "Сканирую данные. Надеюсь, там нет рецепта вашей бабушки.", "Выявляю скрытые смыслы... и опечатки."]
+                },
+                {
+                    progress: 50,
+                    character: `<svg viewBox="0 0 120 120"><path fill="#e0e7ff" d="M30 50 a 10 10 0 0 1 60 0 v 50 a 10 10 0 0 1 -60 0 z" /><rect x="35" y="30" width="50" height="25" rx="5" fill="#c7d2fe"/><rect x="53" y="35" width="14" height="14" rx="3" fill="white" class="eye"/><line x1="60" y1="30" x2="70" y2="15" stroke="#a5b4fc" stroke-width="3"/><circle cx="70" cy="15" r="5" fill="#F97316" class="antenna-light"/><g class="thought-bubble"><path d="M80,25 A 15 15 0 1 1 95,40" fill="none" stroke="#a5b4fc" stroke-width="2"/><text x="88" y="35" font-size="12" fill="#a5b4fc">🤔</text></g></svg>`,
+                    messages: ["Данные получил... Не знаю, как вы с этим живете.", "Отправляю это нашему главному Мыслителю. Ему понравится.", "Так, с этим даже нашему AI придется подумать..."]
+                },
+                {
+                    progress: 75,
+                    character: `<svg viewBox="0 0 120 120"><path fill="#e0e7ff" d="M30 50 a 10 10 0 0 1 60 0 v 50 a 10 10 0 0 1 -60 0 z" /><rect x="35" y="30" width="50" height="25" rx="5" fill="#c7d2fe"/><rect x="53" y="35" width="14" height="14" rx="3" fill="white" class="eye"/><path d="M20 70 C 10 70, 10 90, 25 90" stroke="#a5b4fc" stroke-width="3" fill="none" /><path d="M100 70 C 110 70, 110 90, 95 90" stroke="#a5b4fc" stroke-width="3" fill="none" /><text x="5" y="95" font-size="15">🎨</text></svg>`,
+                    messages: ["Ого, вот это преза получается! Прям ням-ням.", "Навожу красоту, добавляю градиенты...", "Смешиваю цвета, подбираю шрифты... Минутку."]
+                },
+                {
+                    progress: 95,
+                    character: `<svg viewBox="0 0 120 120" class="ready-glow"><path fill="#c7d2fe" d="M30 50 a 10 10 0 0 1 60 0 v 50 a 10 10 0 0 1 -60 0 z" /><rect x="35" y="30" width="50" height="25" rx="5" fill="#a5b4fc"/><rect x="53" y="35" width="14" height="14" rx="3" fill="white" class="eye"/><path d="M 45 70 A 15 15 0 0 0 75 70" fill="white"/></svg>`,
+                    messages: ["Думаю, вам стоит на это взглянуть. Хотя тут очень жестко...", "Результат вас шокирует. Готовы?", "Загрузка почти завершена. Не говорите, что я не предупреждал."]
+                }
+            ];
+
+            let currentStageIndex = 0;
+
+            function updateLoadingAnimation() {
+                if (!isLoading) return;
+
+                const stage = stages[currentStageIndex];
+                const randomMessage = stage.messages[Math.floor(Math.random() * stage.messages.length)];
+
+                progressBar.style.width = stage.progress + '%';
+                progressBar.textContent = stage.progress + '%';
+                messageContainer.textContent = randomMessage;
+                characterContainer.innerHTML = stage.character;
+                
+                // Переключаемся на следующий этап, зацикливая анимацию
+                currentStageIndex = (currentStageIndex + 1) % stages.length;
+            }
+            
+            updateLoadingAnimation();
+            animationInterval = setInterval(updateLoadingAnimation, 6000);
+        }
+
+        function showResult(htmlContent, reportId) {
+            clearInterval(animationInterval);
+            loadingSection.classList.add('hidden');
+            mainContent.classList.add('hidden');
+            resultSection.classList.remove('hidden');
+            resultSection.classList.add('flex');
+            
+            const resultFrame = document.getElementById('result-frame');
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            // Добавляем атрибут sandbox для повышения безопасности
+            iframe.sandbox = 'allow-scripts';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            resultFrame.innerHTML = '';
+            resultFrame.appendChild(iframe);
+            iframe.onload = () => URL.revokeObjectURL(url);
+            
+            document.getElementById('new-doc-button').onclick = () => window.location.href = '/';
+            document.getElementById('share-button').onclick = () => {
+                const shareUrl = `${window.location.origin}/report/${reportId}`;
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    const feedback = document.getElementById('share-feedback');
+                    feedback.style.display = 'block';
+                    setTimeout(() => { feedback.style.display = 'none'; }, 2000);
+                });
+            };
+        }
+
+        function showError(message) {
+            clearInterval(animationInterval);
+            mainContent.classList.remove('hidden');
+            loadingSection.classList.add('hidden');
+            resultSection.classList.add('hidden');
+            const submitButton = document.getElementById('submit-btn');
+            submitButton.innerHTML = `<span class="truncate text-red-500">Ошибка: ${message}. Попробовать снова?</span>`;
+            submitButton.onclick = () => window.location.reload();
+        }
+    });
+    </script>
+</body>
+</html>

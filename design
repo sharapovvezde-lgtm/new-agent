@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="light" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Призма AI - AI-Агент для Excel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4b2bee",
+              "background-light": "#f6f6f8",
+              "background-dark": "#131022",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#100d1b] dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="absolute inset-0 z-0 opacity-20 dark:opacity-20">
+<div class="absolute -top-60 -left-60 h-96 w-96 rounded-full bg-primary/20 blur-3xl"></div>
+<div class="absolute -bottom-80 -right-60 h-96 w-96 rounded-full bg-teal-400/20 blur-3xl"></div>
+</div>
+<main class="relative z-10 mx-auto w-full max-w-5xl px-4 py-10 sm:py-16 lg:py-20">
+<div class="relative mb-8 text-center flex flex-col items-center justify-center">
+<div class="flex items-center justify-center gap-4">
+<svg class="h-16 w-16 sm:h-24 sm:w-24" fill="none" height="100" viewBox="0 0 100 87" width="115" xmlns="http://www.w3.org/2000/svg">
+<path d="M57.5 0L115 86.6025H0L57.5 0Z" fill="url(#paint0_linear_1_2)"></path>
+<g filter="url(#filter0_f_1_2)">
+<path d="M57.5 5L110.115 81.6025H4.88461L57.5 5Z" stroke="white" stroke-opacity="0.5" stroke-width="2"></path>
+</g>
+<g style="mix-blend-mode:overlay">
+<path d="M-10 43.3013H45" stroke="black" stroke-opacity="0.5" stroke-width="6"></path>
+</g>
+<path d="M70 30.8013L125 15.8013" stroke="#38BDF8" stroke-width="6"></path>
+<path d="M70 43.3013H125" stroke="#A78BFA" stroke-width="6"></path>
+<path d="M70 55.8013L125 70.8013" stroke="#FB923C" stroke-width="6"></path>
+<defs>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="85.6025" id="filter0_f_1_2" width="114.231" x="-0.115387" y="4">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape"></feBlend>
+<feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="2"></feGaussianBlur>
+</filter>
+<linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_1_2" x1="57.5" x2="57.5" y1="0" y2="86.6025">
+<stop stop-color="white" stop-opacity="0.1"></stop>
+<stop offset="1" stop-color="white" stop-opacity="0.4"></stop>
+</linearGradient>
+</defs>
+</svg>
+<h1 class="text-[#100d1b] dark:text-white text-6xl font-black leading-tight tracking-[-0.033em] sm:text-8xl">Призма</h1>
+</div>
+</div>
+<div class="mx-auto mb-8 max-w-3xl text-center">
+<p class="text-[#594c9a] dark:text-gray-400 text-lg">Загрузите ваши данные или просто опишите задачу. Наш AI-агент проанализирует информацию, найдет ключевые инсайты и автоматически создаст готовую к показу презентацию с графиками и выводами. Экономьте часы работы и получайте результат за секунды.</p>
+</div>
+<div class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+<div class="flex h-full w-full flex-col">
+<div class="flex h-full w-full flex-col items-center justify-center gap-6 rounded-xl border border-gray-200 bg-white/50 p-6 shadow-lg shadow-gray-500/5 backdrop-blur-sm dark:border-gray-700 dark:bg-background-dark/50">
+<textarea class="form-input min-h-[150px] w-full flex-1 resize-none rounded-lg border-gray-300 bg-gray-50 p-4 text-[#100d1b] placeholder:text-[#594c9a] focus:border-primary focus:ring-2 focus:ring-primary/50 dark:border-gray-600 dark:bg-gray-800/50 dark:text-gray-200 dark:placeholder:text-gray-500 dark:focus:ring-primary/80" placeholder="Введите свой текст, от 500 до 10000 символов..."></textarea>
+</div>
+</div>
+<div class="flex h-full w-full flex-col">
+<div class="flex h-full flex-col items-center justify-center gap-6 rounded-xl border-2 border-dashed border-[#d3cfe7] bg-white/50 p-6 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-colors hover:border-primary/80 dark:border-gray-700 dark:bg-background-dark/50">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-4xl text-primary">upload_file</span>
+<p class="text-center text-lg font-bold leading-tight tracking-[-0.015em] text-[#100d1b] dark:text-white">Перетащите или нажмите, чтобы загрузить файл</p>
+<p class="text-center text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Поддерживаемые форматы: .xlsx, .xls, .pdf</p>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e9e7f3] dark:bg-gray-700 text-[#100d1b] dark:text-gray-200 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<span class="truncate">Загрузить файл</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-center">
+<button class="flex min-w-[84px] w-full max-w-lg cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-gradient-to-br from-purple-600 to-blue-500 text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-100">
+<span class="truncate">Сделать презентацию</span>
+</button>
+</div>
+<div class="mt-20 sm:mt-24 lg:mt-32">
+<div class="flex flex-col gap-10">
+<div class="text-center">
+<h2 class="text-[#100d1b] dark:text-white tracking-tight text-3xl font-bold leading-tight sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em] max-w-3xl mx-auto">Как Призма превращает данные в инсайты</h2>
+<p class="text-[#594c9a] dark:text-gray-400 text-base font-normal leading-normal max-w-3xl mx-auto mt-4">Наш AI-агент берет на себя сложную работу по анализу и визуализации, чтобы вы могли сосредоточиться на принятии решений.</p>
+</div>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="flex flex-1 flex-col gap-3 rounded-xl border border-gray-200 bg-white/50 dark:border-gray-700 dark:bg-background-dark/50 backdrop-blur-sm p-5 shadow-lg shadow-gray-500/5">
+<span class="material-symbols-outlined text-3xl text-primary">rocket_launch</span>
+<div class="flex flex-col gap-1">
+<h3 class="text-base font-bold leading-tight text-[#100d1b] dark:text-white">Скорость и Простота</h3>
+<p class="text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Забудьте о часах ручной работы. Наш AI мгновенно анализирует ваши данные и текст, экономя ваше время.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-3 rounded-xl border border-gray-200 bg-white/50 dark:border-gray-700 dark:bg-background-dark/50 backdrop-blur-sm p-5 shadow-lg shadow-gray-500/5">
+<span class="material-symbols-outlined text-3xl text-primary">monitoring</span>
+<div class="flex flex-col gap-1">
+<h3 class="text-base font-bold leading-tight text-[#100d1b] dark:text-white">От данных к Визуализации</h3>
+<p class="text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Автоматически преобразуем сырые таблицы и документы в понятные графики, диаграммы и ключевые выводы.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-3 rounded-xl border border-gray-200 bg-white/50 dark:border-gray-700 dark:bg-background-dark/50 backdrop-blur-sm p-5 shadow-lg shadow-gray-500/5">
+<span class="material-symbols-outlined text-3xl text-primary">lightbulb</span>
+<div class="flex flex-col gap-1">
+<h3 class="text-base font-bold leading-tight text-[#100d1b] dark:text-white">Готовые Бизнес-Инсайты</h3>
+<p class="text-sm font-normal leading-normal text-[#594c9a] dark:text-gray-400">Получайте не просто данные, а готовые к презентации инсайты, которые помогут вашей команде принимать верные решения.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mx-auto mt-20 max-w-3xl sm:mt-24 lg:mt-32">
+<div class="mb-10 text-center">
+<h2 class="text-[#100d1b] dark:text-white tracking-tight text-3xl font-bold leading-tight sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]">Часто задаваемые вопросы</h2>
+</div>
+<div class="space-y-4">
+<details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+<summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Насколько защищены мои данные?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+</summary>
+<p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">Мы используем передовые протоколы шифрования и строгие политики конфиденциальности. Ваши данные обрабатываются в безопасной среде и никогда не передаются третьим лицам.</p>
+</details>
+<details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+<summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Какие форматы файлов поддерживаются?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+</summary>
+<p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">В настоящее время мы поддерживаем файлы Excel (.xlsx, .xls) и документы PDF (.pdf). Мы постоянно работаем над расширением списка поддерживаемых форматов.</p>
+</details>
+<details class="group rounded-xl border border-gray-200 bg-white/50 p-5 shadow-lg shadow-gray-500/5 backdrop-blur-sm transition-all duration-300 open:bg-white/70 open:shadow-xl open:shadow-gray-500/10 dark:border-gray-700 dark:bg-background-dark/50 dark:open:bg-background-dark/70">
+<summary class="flex cursor-pointer list-none items-center justify-between text-base font-bold text-[#100d1b] dark:text-white">
+                            Какие инсайты я могу получить?
+                            <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-45">add</span>
+</summary>
+<p class="mt-4 text-sm leading-normal text-[#594c9a] dark:text-gray-400">Призма AI может выявлять тренды, находить аномалии, сегментировать данные, строить прогнозы и формулировать ключевые выводы в виде текста и визуализаций, готовых для включения в вашу презентацию.</p>
+</details>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
